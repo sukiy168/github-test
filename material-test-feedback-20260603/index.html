@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>材試平台多規格功能試辦回饋｜115.06.03 會議簡報</title>
+  <style>
+    :root {
+      --ink: #15231f;
+      --muted: #65746d;
+      --paper: #f4f1e8;
+      --panel: #fffdf7;
+      --line: #ded6c4;
+      --green: #1f715c;
+      --teal: #2d9297;
+      --gold: #b8862d;
+      --red: #b94a48;
+      --blue: #3f688e;
+      --soft: #eee7d7;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #e7dfd0;
+      color: var(--ink);
+      font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+      line-height: 1.35;
+    }
+
+    .slide {
+      width: min(1600px, 100vw);
+      aspect-ratio: 16 / 9;
+      background: var(--paper);
+      border-top: 18px solid var(--green);
+      padding: 30px 42px 28px;
+      overflow: hidden;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: start;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1.12;
+      font-weight: 850;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(2, max-content);
+      gap: 10px;
+    }
+
+    .badge {
+      min-width: 164px;
+      padding: 11px 16px;
+      background: var(--green);
+      color: #fff;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .badge:nth-child(2) { background: var(--teal); }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.05fr 1.75fr 1.08fr;
+      gap: 18px;
+      height: calc(100% - 92px);
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 22px 24px;
+      min-height: 0;
+    }
+
+    .panel-main {
+      padding: 22px 24px 20px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      color: var(--green);
+      font-size: 18px;
+      line-height: 1.18;
+      font-weight: 850;
+    }
+
+    .axis {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.3;
+      font-weight: 850;
+    }
+
+    .purpose {
+      margin: 15px 0 0;
+      padding: 14px 16px;
+      background: var(--soft);
+      border-left: 5px solid var(--green);
+      color: #394740;
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .metric {
+      padding: 12px 12px 10px;
+      border-top: 5px solid var(--green);
+      background: #faf7ef;
+    }
+
+    .metric:nth-child(2) { border-color: var(--teal); }
+    .metric:nth-child(3) { border-color: var(--gold); }
+    .metric:nth-child(4) { border-color: var(--red); }
+
+    .metric strong {
+      display: block;
+      font-size: 30px;
+      line-height: 1;
+      margin-bottom: 7px;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .decision {
+      margin-top: 15px;
+      display: grid;
+      gap: 9px;
+    }
+
+    .decision-row {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+
+    .tag {
+      padding: 5px 7px;
+      color: #fff;
+      background: var(--green);
+      font-size: 11px;
+      font-weight: 850;
+      text-align: center;
+    }
+
+    .tag.red { background: var(--red); }
+    .tag.gold { background: var(--gold); }
+    .tag.teal { background: var(--teal); }
+    .tag.blue { background: var(--blue); }
+
+    .decision-row strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 3px;
+    }
+
+    .decision-row p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 11.5px;
+    }
+
+    .section-note {
+      margin: -4px 0 13px;
+      color: var(--muted);
+      font-size: 12.5px;
+      font-weight: 650;
+    }
+
+    .issue-board {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .issue {
+      min-height: 104px;
+      padding: 12px 13px;
+      background: #fbf8f0;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--green);
+    }
+
+    .issue:nth-child(2) { border-left-color: var(--gold); }
+    .issue:nth-child(3) { border-left-color: var(--teal); }
+    .issue:nth-child(4) { border-left-color: var(--red); }
+    .issue:nth-child(5) { border-left-color: var(--blue); }
+    .issue:nth-child(6) { border-left-color: var(--teal); }
+    .issue:nth-child(7) { border-left-color: var(--green); }
+    .issue:nth-child(8) { border-left-color: var(--blue); }
+
+    .speaker {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+
+    .speaker b {
+      color: var(--green);
+      font-size: 13px;
+    }
+
+    .speaker span {
+      color: var(--muted);
+      font-size: 10.5px;
+      font-weight: 750;
+    }
+
+    .issue h3 {
+      margin: 0 0 6px;
+      font-size: 14px;
+      line-height: 1.25;
+    }
+
+    .issue p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 11.5px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 8px;
+    }
+
+    .chip {
+      padding: 3px 6px;
+      background: #efe8d8;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .chip.red { color: var(--red); }
+    .chip.green { color: var(--green); }
+    .chip.gold { color: var(--gold); }
+    .chip.teal { color: var(--teal); }
+    .chip.blue { color: var(--blue); }
+
+    .bars {
+      display: grid;
+      gap: 10px;
+      margin: 4px 0 16px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 96px 30px 1fr;
+      gap: 8px;
+      align-items: center;
+      font-size: 11.5px;
+      font-weight: 800;
+    }
+
+    .count {
+      color: var(--muted);
+      text-align: right;
+      font-weight: 750;
+    }
+
+    .track {
+      height: 10px;
+      background: #e1dac8;
+    }
+
+    .fill {
+      height: 10px;
+      background: var(--green);
+    }
+
+    .fill.teal { background: var(--teal); }
+    .fill.red { background: var(--red); }
+    .fill.gold { background: var(--gold); }
+    .fill.blue { background: var(--blue); }
+
+    .priority {
+      padding: 13px 14px;
+      background: var(--soft);
+      border-left: 5px solid var(--red);
+      margin-bottom: 15px;
+    }
+
+    .priority strong {
+      display: block;
+      color: var(--red);
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .priority p {
+      margin: 0;
+      color: #394740;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .milestone {
+      display: grid;
+      grid-template-columns: 66px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+
+    .date {
+      color: #fff;
+      background: var(--green);
+      padding: 6px 7px;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .milestone:nth-child(2) .date { background: var(--gold); }
+    .milestone:nth-child(3) .date { background: var(--teal); }
+
+    .milestone strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 3px;
+    }
+
+    .milestone p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 11.5px;
+    }
+
+    footer {
+      margin-top: 10px;
+      color: #8c948d;
+      font-size: 10.5px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    @media (max-width: 1100px) {
+      body { display: block; }
+      .slide {
+        width: 100%;
+        height: auto;
+        aspect-ratio: auto;
+        overflow: visible;
+      }
+      .layout,
+      header {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+      .issue-board {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="slide">
+    <header>
+      <div>
+        <h1>材試平台多規格功能試辦回饋</h1>
+        <div class="subtitle">115年6月3日會議紀錄整理｜工管部試辦意見收斂與 7 月全面上架前修正重點</div>
+      </div>
+      <div class="meta" aria-label="會議基本資訊">
+        <div class="badge">115.06.03 09:30-11:00</div>
+        <div class="badge">主持：鄭相甫</div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <section class="panel">
+        <h2>會議結論｜主軸</h2>
+        <p class="axis">多規格功能可推展，但上架前需先確認它在現場端真的可用。</p>
+        <p class="purpose">會議目的不是重新定義材料管理流程，而是確認試辦功能在現場材料進場、抽驗紀錄、實驗報告歸檔與查核展示時是否真的可用。</p>
+
+        <div class="metrics">
+          <div class="metric"><strong>6</strong><span>個試辦計畫</span></div>
+          <div class="metric"><strong>5</strong><span>個單位發言回饋</span></div>
+          <div class="metric"><strong>10</strong><span>項具體議題</span></div>
+          <div class="metric"><strong>1</strong><span>項 Bug 優先修正</span></div>
+        </div>
+
+        <div class="decision">
+          <div class="decision-row">
+            <div class="tag red">先修</div>
+            <div>
+              <strong>抽樣數量顯示錯誤</strong>
+              <p>6 個規格各取 1 支，不應在表單顯示總量 6 支；交由研資部優先修正欄位對應。</p>
+            </div>
+          </div>
+          <div class="decision-row">
+            <div class="tag gold">再補</div>
+            <div>
+              <strong>頻率欄位與日期別附件</strong>
+              <p>補強多規格明細統計與紀錄表附件，避免表格欄位不足造成資訊失真。</p>
+            </div>
+          </div>
+          <div class="decision-row">
+            <div class="tag teal">上架</div>
+            <div>
+              <strong>7 月全面推展，但邊界要說清楚</strong>
+              <p>混凝土合併建置暫緩，試驗包整合與多層分類列入推展後滾動優化。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel panel-main">
+        <h2>討論過程｜發言與回應</h2>
+        <p class="section-note">濃縮成「發言人、次議題、關鍵回應、處理方向」四個訊號，方便快速判讀功能缺口。</p>
+
+        <div class="issue-board">
+          <div class="issue">
+            <div class="speaker"><b>陳鈺萱</b><span>材料建置</span></div>
+            <h3>混凝土不同強度是否合併一筆？</h3>
+            <p>暫不可行；各強度已有契約數量管控，合併會破壞用量管理。</p>
+            <div class="chips"><span class="chip red">暫緩</span><span class="chip">欄位結構優化後再評估</span></div>
+          </div>
+
+          <div class="issue">
+            <div class="speaker"><b>陳鈺萱</b><span>統計欄位</span></div>
+            <h3>多規格明細缺少「頻率」</h3>
+            <p>主席認同；後續與研資部研議，短期以 Excel 篩選統計支援。</p>
+            <div class="chips"><span class="chip gold">研議</span><span class="chip green">Excel 補位</span></div>
+          </div>
+
+          <div class="issue">
+            <div class="speaker"><b>陳鈺萱</b><span>紀錄輸出</span></div>
+            <h3>抽驗紀錄表未顯示規格別數量</h3>
+            <p>合格欄位空間不足；朝日期別多規格 Excel 作為紀錄附件規劃。</p>
+            <div class="chips"><span class="chip teal">附件化</span><span class="chip">正式推展前討論格式</span></div>
+          </div>
+
+          <div class="issue">
+            <div class="speaker"><b>林鈺恆</b><span>表單 Bug</span></div>
+            <h3>6 個規格各取 1 支，表單顯示 6 支</h3>
+            <p>研判欄位抓取位置錯置；列為本次最明確且需優先修正問題。</p>
+            <div class="chips"><span class="chip red">Bug</span><span class="chip red">研資部優先修正</span></div>
+          </div>
+
+          <div class="issue">
+            <div class="speaker"><b>林鈺恆</b><span>歸檔提醒</span></div>
+            <h3>實驗報告常延遲 1 至 2 個月</h3>
+            <p>提醒機制屬共通需求；先評估用醒目顏色提示上傳狀態。</p>
+            <div class="chips"><span class="chip gold">需求確認</span><span class="chip">通知形式待設計</span></div>
+          </div>
+
+          <div class="issue">
+            <div class="speaker"><b>林鈺恆 / 吳惠文</b><span>查核展示</span></div>
+            <h3>表單、報告、證明文件分散頁面</h3>
+            <p>長期朝單一試驗包整合；短期用自檢表圖示降低跨頁查閱成本。</p>
+            <div class="chips"><span class="chip teal">長期整合</span><span class="chip green">短期減少跳頁</span></div>
+          </div>
+
+          <div class="issue">
+            <div class="speaker"><b>吳惠文</b><span>材料適用</span></div>
+            <h3>不只鋼筋，需涵蓋 H 型鋼、鋼板等</h3>
+            <p>方向成立；需由試辦計畫提供案例，驗證欄位與操作方式。</p>
+            <div class="chips"><span class="chip green">可擴充</span><span class="chip">案例驗證</span></div>
+          </div>
+
+          <div class="issue">
+            <div class="speaker"><b>蔡沅宏</b><span>分類層級</span></div>
+            <h3>「項目、規格、備註」不足以描述鋼材</h3>
+            <p>多層分類利於分析，但上架初期先控複雜度；書面資料送鄭相甫。</p>
+            <div class="chips"><span class="chip blue">長期架構</span><span class="chip">滾動優化</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>結論綜整</h2>
+        <p class="section-note">議題熱區顯示：功能已可推展，但優先處理順序應以「錯誤修正、輸出補強、查核減負」為主。</p>
+
+        <div class="bars">
+          <div class="bar-row"><span>欄位/資料結構</span><span class="count">3</span><div class="track"><div class="fill" style="width:100%"></div></div></div>
+          <div class="bar-row"><span>查核/歸檔</span><span class="count">3</span><div class="track"><div class="fill teal" style="width:100%"></div></div></div>
+          <div class="bar-row"><span>表單輸出</span><span class="count">2</span><div class="track"><div class="fill red" style="width:66%"></div></div></div>
+          <div class="bar-row"><span>材料適用</span><span class="count">1</span><div class="track"><div class="fill gold" style="width:33%"></div></div></div>
+          <div class="bar-row"><span>操作成本</span><span class="count">1</span><div class="track"><div class="fill blue" style="width:33%"></div></div></div>
+        </div>
+
+        <div class="priority">
+          <strong>優先處理：抽樣數量 Bug</strong>
+          <p>這是會議中最具體、可驗證、會直接影響紀錄可信度的問題；須在全面上架前完成修正確認。</p>
+        </div>
+
+        <h2>全面上架期程</h2>
+        <div class="timeline">
+          <div class="milestone">
+            <div class="date">6月底前</div>
+            <div><strong>召開全公司座談會</strong><p>向建造計畫說明多規格功能、試辦限制與過渡操作方式。</p></div>
+          </div>
+          <div class="milestone">
+            <div class="date">7月份起</div>
+            <div><strong>全面推展新功能</strong><p>納入材試三表、數位表單，並同步蒐集上架後回饋。</p></div>
+          </div>
+          <div class="milestone">
+            <div class="date">推展後</div>
+            <div><strong>滾動優化</strong><p>處理試驗包整合、分類層級、提醒機制與更多材料案例。</p></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <div>資料來源：20260603_多規格功能試辦計畫意見回饋會議_會議紀錄.md</div>
+      <div>HTML 簡報風格｜橫向 16:9</div>
+    </footer>
+  </main>
+</body>
+</html>
